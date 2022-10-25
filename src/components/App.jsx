@@ -1,4 +1,6 @@
+import { Button } from './Button/Button';
 import { TreckerCard } from './TreckerCard/TreckerCard';
+import pause from 'icons/pause.svg';
 
 export const App = () => {
   return (
@@ -12,7 +14,8 @@ export const App = () => {
     //   color: '#010101'
     // }}
     >
-      <TreckerCard />
+      <TreckerCard subTitle={'testSubTitle'} title={'TestTitle'} />
+      <Button icon={pause}></Button>
     </div>
   );
 };

@@ -1,26 +1,32 @@
 import { useEffect, useState } from 'react';
+import s from 'components/TreckerCard/TreckerCard.module.scss';
 
-export const TreckerCard = () => {
+export const TreckerCard = ({ subTitle, title }) => {
   return (
-    <div className="TreckerCard">
-      <p></p>
-      <p></p>
+    <div className={s['trecker-card']} style={{ width: '300px' }}>
+      <TreckerTittle subTitle={subTitle} title={title} />
       <TreckerTimer />
+    </div>
+  );
+};
+
+const TreckerTittle = ({ subTitle, title }) => {
+  return (
+    <div>
+      <p>{subTitle}</p>
+      <p>{title}</p>
     </div>
   );
 };
 
 const TreckerTimer = () => {
   const startTime = Date.now();
-  console.log(startTime);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   const getTime = startTime => {
     const time = Date.now() - startTime;
-    console.log(time);
-
     setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
