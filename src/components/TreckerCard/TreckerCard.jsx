@@ -9,12 +9,15 @@ import play from '../../icons/play.svg';
 export const TreckerCard = ({ subTitle, title }) => {
   return (
     <div className={s['trecker-card']} style={{ width: '300px' }}>
-      <TreckerTittle subTitle={subTitle} title={title} />
-      <Button
-        className={`${s['trecker-card__btn']} ${s['trecker-card__btn--close']}`}
-      >
-        <img src={close} alt="" />
-      </Button>
+      <div>
+        <TreckerTittle subTitle={subTitle} title={title} />
+        <Button
+          className={`${s['trecker-card__btn']} ${s['trecker-card__btn--close']}`}
+        >
+          <img src={close} alt="" />
+        </Button>
+      </div>
+
       <TreckerTimer className={s['trecker-card__timer']} />
       <TreckerTimerControls className={s['trecker-card__controls']} />
     </div>
@@ -23,9 +26,9 @@ export const TreckerCard = ({ subTitle, title }) => {
 
 const TreckerTittle = ({ subTitle, title }) => {
   return (
-    <div>
-      <p>{subTitle}</p>
-      <p>{title}</p>
+    <div className={s['trecker-card__title-wraper']}>
+      <p className={s['trecker-card__sub-title']}>{subTitle}</p>
+      <p className={s['trecker-card__title']}>{title}</p>
     </div>
   );
 };
@@ -53,7 +56,7 @@ const TreckerTimer = ({ className, started }) => {
   return (
     <p className={classes}>
       {minutes}
-      <span className="active">:</span>
+      <span>:</span>
       {seconds}
     </p>
   );
