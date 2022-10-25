@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
+import classNames from 'class-names';
 import s from 'components/TreckerCard/TreckerCard.module.scss';
+import { Button } from 'components/Button/Button';
+import pause from '../../icons/pause.svg';
+import close from '../../icons/x.svg';
+import play from '../../icons/play.svg';
 
 export const TreckerCard = ({ subTitle, title }) => {
   return (
     <div className={s['trecker-card']} style={{ width: '300px' }}>
       <TreckerTittle subTitle={subTitle} title={title} />
-      <TreckerTimer />
+      <Button
+        className={`${s['trecker-card__btn']} ${s['trecker-card__btn--close']}`}
+      >
+        <img src={close} alt="" />
+      </Button>
+      <TreckerTimer className={s['trecker-card__timer']} />
+      <TreckerTimerControls className={s['trecker-card__controls']} />
     </div>
   );
 };
@@ -19,7 +30,10 @@ const TreckerTittle = ({ subTitle, title }) => {
   );
 };
 
-const TreckerTimer = () => {
+const TreckerTimer = ({ className, started }) => {
+  const classes = classNames(className, {
+    [`${s['started']}`]: started || true,
+  });
   const startTime = Date.now();
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -37,10 +51,24 @@ const TreckerTimer = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <p>
+    <p className={classes}>
       {minutes}
-      <span>:</span>
+      <span className="active">:</span>
       {seconds}
     </p>
+  );
+};
+
+const TreckerTimerControls = ({ className }) => {
+  const classes = classNames(className);
+  return (
+    <div className={classes}>
+      <Button className={s['trecker-card__btn']}>
+        <img src={play} alt="" />
+      </Button>
+      <Button className={s['trecker-card__btn']}>
+        <img src={pause} alt="" />
+      </Button>
+    </div>
   );
 };

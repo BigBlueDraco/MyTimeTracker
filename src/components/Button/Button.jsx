@@ -1,6 +1,7 @@
 import classNames from 'class-names';
 import pause from 'icons/pause.svg';
 import PropTypes from 'prop-types';
+import s from './button.module.scss';
 
 export const Button = ({
   children,
@@ -10,10 +11,10 @@ export const Button = ({
   active,
   ...attrs
 }) => {
-  const classes = classNames('btn', className, { active });
+  const classes = classNames(s['btn'], className, { active });
   return (
     <button className={classes} disable={disabled} onClick={onClick} {...attrs}>
-      children
+      {children}
     </button>
   );
 };
