@@ -2,8 +2,8 @@
   background: #e15241;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: space-evenly;
+  gap: 15px;
 
   min-width: 262px;
   min-height: 262px;
@@ -25,8 +25,8 @@
     width: 25px;
     height: 25px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
   }
 
   &__controls {
@@ -80,7 +80,7 @@
     0% {
       color: transparent;
     }
-    100% {
+    50% {
       color: black;
     }
   }
