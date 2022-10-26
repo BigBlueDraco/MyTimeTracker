@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 
 import { Button } from 'components/Button/Button';
 
-import s from 'components/TreckerCard/TreckerCard.module.scss';
+import s from 'components/TimerTreckerCard/TimerTreckerCard.module.scss';
 
 import pause from '../../icons/pause.svg';
 import close from '../../icons/x.svg';
 import play from '../../icons/play.svg';
 
-export const TreckerTimerCard = ({
+export const TimerTreckerCard = ({
   subTitle,
   title,
   className,
@@ -120,17 +120,17 @@ const TreckerTimerControls = ({ className, startTimer, stopTimer }) => {
   );
 };
 
-TreckerTimerCard.propTypes = {
+TimerTreckerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
   className: PropTypes.string,
 };
 
-TreckerTimerCard.propTypes = {
+TimerTreckerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
-TreckerTimerCard.propTypes = {
+TimerTreckerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
