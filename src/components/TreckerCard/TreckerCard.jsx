@@ -19,7 +19,6 @@ export const TreckerCard = ({ subTitle, title }) => {
       </div>
 
       <TreckerTimer className={s['trecker-card__timer']} />
-      <TreckerTimerControls className={s['trecker-card__controls']} />
     </div>
   );
 };
@@ -33,43 +32,68 @@ const TreckerTittle = ({ subTitle, title }) => {
   );
 };
 
-const TreckerTimer = ({ className, started }) => {
+const TreckerTimer = ({ className }) => {
   const classes = classNames(className, {
-    [`${s['started']}`]: started || true,
+    [`${s['started']}`]: true,
   });
-  const startTime = Date.now();
+  const [saveTime, setSaveTime] = useState(0);
+  const [timerInterval, setTimerInterval] = useState();
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const getTime = startTime => {
-    const time = Date.now() - startTime;
-    setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
-    setMinutes(Math.floor((time / 1000 / 60) % 60));
-    setSeconds(Math.floor((time / 1000) % 60));
+  const getTime = (startTime, saveTime) => {
+    if (saveTime) {
+      const time = saveTime + Date.now() - startTime;
+      setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+      setSaveTime(time);
+      return;
+    } else {
+      const time = Date.now() - startTime;
+      setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+      setSaveTime(time);
+    }
   };
-  useEffect(() => {
-    const interval = setInterval(() => getTime(startTime), 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+  const startTimer = () => {
+    const startTime = Date.now();
+    const interval = setInterval(() => getTime(startTime, saveTime), 1000);
+    setTimerInterval(interval);
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerInterval);
+  };
+
   return (
-    <p className={classes}>
-      {minutes}
-      <span>:</span>
-      {seconds}
-    </p>
+    <>
+      {' '}
+      <p className={classes}>
+        {minutes}
+        <span>:</span>
+        {seconds}
+      </p>
+      <TreckerTimerControls
+        className={s['trecker-card__controls']}
+        startTimer={startTimer}
+        stopTimer={stopTimer}
+      />
+    </>
   );
 };
 
-const TreckerTimerControls = ({ className }) => {
+const TreckerTimerControls = ({ className, startTimer, stopTimer }) => {
   const classes = classNames(className);
   return (
     <div className={classes}>
-      <Button className={s['trecker-card__btn']}>
+      <Button className={s['trecker-card__btn']} onClick={startTimer}>
         <img src={play} alt="" />
       </Button>
-      <Button className={s['trecker-card__btn']}>
+      <Button className={s['trecker-card__btn']} onClick={stopTimer}>
         <img src={pause} alt="" />
       </Button>
     </div>
