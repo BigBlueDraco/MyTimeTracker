@@ -1,0 +1,34 @@
+.add-trecker {
+  background: #a5a5a5;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 262px;
+  height: 262px;
+  min-width: 262px;
+  min-height: 262px;
+}
+
+.add-trecker {
+  &__btn {
+    border-radius: 12px;
+    background: #a5a5a5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__input {
+    width: 100%;
+  }
+}

@@ -1,5 +1,5 @@
 import { Button } from './Button/Button';
-import { TreckerCard } from './TreckerCard/TreckerCard';
+import { TreckerTimerCard } from './TreckerCard/TreckerCard';
 import pause from 'icons/pause.svg';
 import { BlockPicker } from 'react-color';
 import { AddTrecker } from './AddTrecker/AddTrecker';
@@ -28,7 +28,7 @@ export const App = () => {
         onChangeComplete={handleChangeComplete}
         triangle="hide"
       />
-      <TreckerCard />
+      <TreckerTimerCard />
       <Button icon={pause}></Button>
     </div>
   );

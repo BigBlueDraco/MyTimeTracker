@@ -11,7 +11,7 @@ import pause from '../../icons/pause.svg';
 import close from '../../icons/x.svg';
 import play from '../../icons/play.svg';
 
-export const TreckerCard = ({
+export const TreckerTimerCard = ({
   subTitle,
   title,
   className,
@@ -120,17 +120,17 @@ const TreckerTimerControls = ({ className, startTimer, stopTimer }) => {
   );
 };
 
-TreckerCard.propTypes = {
+TreckerTimerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
   className: PropTypes.string,
 };
 
-TreckerCard.propTypes = {
+TreckerTimerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
-TreckerCard.propTypes = {
+TreckerTimerCard.propTypes = {
   subTitle: PropTypes.string,
   title: PropTypes.string,
 };
