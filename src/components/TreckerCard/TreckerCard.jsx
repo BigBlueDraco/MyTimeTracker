@@ -1,14 +1,34 @@
 import { useEffect, useState } from 'react';
+
 import classNames from 'class-names';
-import s from 'components/TreckerCard/TreckerCard.module.scss';
+import PropTypes from 'prop-types';
+
 import { Button } from 'components/Button/Button';
+
+import s from 'components/TreckerCard/TreckerCard.module.scss';
+
 import pause from '../../icons/pause.svg';
 import close from '../../icons/x.svg';
 import play from '../../icons/play.svg';
 
-export const TreckerCard = ({ subTitle, title }) => {
+export const TreckerCard = ({
+  subTitle,
+  title,
+  className,
+  backgroundColor,
+  width,
+  height,
+}) => {
+  const classes = classNames(s['trecker-card'], className);
   return (
-    <div className={s['trecker-card']} style={{ width: '300px' }}>
+    <div
+      className={classes}
+      style={{
+        backgroundColor,
+        width,
+        height,
+      }}
+    >
       <div>
         <TreckerTittle subTitle={subTitle} title={title} />
         <Button
@@ -98,4 +118,19 @@ const TreckerTimerControls = ({ className, startTimer, stopTimer }) => {
       </Button>
     </div>
   );
+};
+
+TreckerCard.propTypes = {
+  subTitle: PropTypes.string,
+  title: PropTypes.string,
+  className: PropTypes.string,
+};
+
+TreckerCard.propTypes = {
+  subTitle: PropTypes.string,
+  title: PropTypes.string,
+};
+TreckerCard.propTypes = {
+  subTitle: PropTypes.string,
+  title: PropTypes.string,
 };

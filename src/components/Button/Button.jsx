@@ -13,7 +13,12 @@ export const Button = ({
 }) => {
   const classes = classNames(s['btn'], className, { active });
   return (
-    <button className={classes} disable={disabled} onClick={onClick} {...attrs}>
+    <button
+      className={classes}
+      disable={disabled.toString()}
+      onClick={onClick}
+      {...attrs}
+    >
       {children}
     </button>
   );
