@@ -13,8 +13,8 @@ import play from '../../icons/play.svg';
 import { Card } from 'components/Card/Card';
 
 export const TimerTreckerCard = ({
-  subTitle,
-  title,
+  subTitle = 'Timer default subTitle',
+  title = 'timer default Title',
 
   close,
   id,
@@ -52,9 +52,9 @@ const TreckerTimer = ({ className }) => {
   });
   const [saveTime, setSaveTime] = useState(0);
   const [timerInterval, setTimerInterval] = useState();
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [hours, setHours] = useState('');
+  const [minutes, setMinutes] = useState('');
+  const [seconds, setSeconds] = useState('');
 
   const getTime = (startTime, saveTime) => {
     if (saveTime) {
@@ -86,9 +86,9 @@ const TreckerTimer = ({ className }) => {
   return (
     <>
       <p className={classes}>
-        {minutes}
+        {minutes.toString().padStart(2, '0')}
         <span>:</span>
-        {seconds}
+        {seconds.toString().padStart(2, '0')}
       </p>
       <TreckerTimerControls
         className={s['trecker-card__controls']}

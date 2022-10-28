@@ -38,7 +38,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit({ id: nanoid(), color, title, subTitle });
-    console.log('i');
+    toggleForm();
     setColor('');
     setTitle('');
     setSubTitle('');
@@ -101,7 +101,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
               ]}
             />
           </label>
-          <Button type="submit" />
+          <Button type="submit" style={{ backgroundColor: color }} />
         </form>
       )}
     </Card>
