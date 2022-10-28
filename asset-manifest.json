@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/my-time-tracker/static/css/main.a72317a1.css",
+    "main.css": "/my-time-tracker/static/css/main.050c44f4.css",
     "main.js": "/my-time-tracker/static/js/main.fe60ae46.js",
     "index.html": "/my-time-tracker/index.html",
     "static/media/plus.svg": "/my-time-tracker/static/media/plus.e49fa055b12438e9666e6e6d9de011b4.svg",
     "static/media/pause.svg": "/my-time-tracker/static/media/pause.7ff918ee80f0864463d4053dc2f71dfb.svg",
     "static/media/x.svg": "/my-time-tracker/static/media/x.4ca65a5559c9af2deb449223052e3b9d.svg",
     "static/media/play.svg": "/my-time-tracker/static/media/play.3f0363b31ca7324e042a7a6403ae5834.svg",
-    "main.a72317a1.css.map": "/my-time-tracker/static/css/main.a72317a1.css.map",
+    "main.050c44f4.css.map": "/my-time-tracker/static/css/main.050c44f4.css.map",
     "main.fe60ae46.js.map": "/my-time-tracker/static/js/main.fe60ae46.js.map"
   },
   "entrypoints": [
-    "static/css/main.a72317a1.css",
+    "static/css/main.050c44f4.css",
     "static/js/main.fe60ae46.js"
   ]
 }
