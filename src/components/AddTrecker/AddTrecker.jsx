@@ -4,18 +4,22 @@ import classNames from 'class-names';
 import plus from 'icons/plus.svg';
 import s from './AddTrecker.module.scss';
 import { useState } from 'react';
-import { Card } from 'components/TreckerCard/TreckerCard';
+import { Card } from 'components/Card/Card';
+import { nanoid } from 'nanoid';
 
 export const AddTrecker = ({ className, onSubmit }) => {
   const [color, setColor] = useState('');
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const handleColorChange = (color, event) => {
-    setColor(color);
-    console.log(color.hex);
+    setColor(color.hex);
   };
 
-  const handleChange = ({ taget: { value, name } }) => {
+  const handleChange = e => {
+    const {
+      target: { value, name },
+    } = e;
     switch (name) {
       case 'title':
         setTitle(value);
@@ -27,61 +31,79 @@ export const AddTrecker = ({ className, onSubmit }) => {
         return;
     }
   };
+  const toggleForm = () => {
+    setIsFormOpen(!isFormOpen);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('sub');
-    onSubmit({ color, title, subTitle });
+    onSubmit({ id: nanoid(), color, title, subTitle });
+    console.log('i');
     setColor('');
     setTitle('');
     setSubTitle('');
   };
 
   return (
-    <Card className={s['add-trecker']}>
-      {/* <Button className={s['add-trecker__btn']}>
-        <img src={plus} width="45px"></img>
-      </Button> */}
-
-      <form
-        onSubmit={handleSubmit}
-        action=""
-        className={s['add-trecker__form']}
-      >
-        <label htmlFor="">
-          <p>Title</p>
-          <input type="text" name="title" className={s['add-trecker__input']} />
-        </label>
-        <label htmlFor="">
-          <p>Sub Title</p>
-          <input
-            type="text"
-            name="subTitle"
-            className={s['add-trecker__input']}
-          />
-        </label>
-        <label htmlFor="">
-          Choose color
-          <CirclePicker
-            onChange={handleColorChange}
-            colors={[
-              '#B80000',
-              '#DB3E00',
-              '#FCCB00',
-              '#008B02',
-              '#006B76',
-              '#1273DE',
-              '#004DCF',
-              '#5300EB',
-              '#EB9694',
-              '#EB9695',
-              '#EB9696',
-              '#EB9697',
-            ]}
-          />
-        </label>
-        <Button type="submit" />
-      </form>
+    <Card
+      className={s['add-trecker']}
+      onClose={toggleForm}
+      isClosebel={isFormOpen}
+    >
+      {!isFormOpen && (
+        <Button className={s['add-trecker__btn']} onClick={toggleForm}>
+          <img src={plus} width="45px"></img>
+        </Button>
+      )}
+      {isFormOpen && (
+        <form
+          onSubmit={handleSubmit}
+          action=""
+          className={s['add-trecker__form']}
+        >
+          <label htmlFor="">
+            <p>Title</p>
+            <input
+              type="text"
+              name="title"
+              className={s['add-trecker__input']}
+              onInput={e => handleChange(e)}
+              value={title}
+            />
+          </label>
+          <label htmlFor="">
+            <p>Sub Title</p>
+            <input
+              type="text"
+              name="subTitle"
+              className={s['add-trecker__input']}
+              onInput={e => handleChange(e)}
+              value={subTitle}
+            />
+          </label>
+          <label htmlFor="">
+            Choose color
+            <CirclePicker
+              onChange={handleColorChange}
+              colors={[
+                '#B80000',
+                '#DB3E00',
+                '#FCCB00',
+                '#008B02',
+                '#006B76',
+                '#1273DE',
+                '#004DCF',
+                '#5300EB',
+                '#EB9694',
+                '#EB9695',
+                '#EB9696',
+                '#EB9697',
+              ]}
+            />
+          </label>
+          <Button type="submit" />
+        </form>
+      )}
     </Card>
   );
 };

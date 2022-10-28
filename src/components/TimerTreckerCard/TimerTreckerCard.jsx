@@ -10,7 +10,7 @@ import s from 'components/TimerTreckerCard/TimerTreckerCard.module.scss';
 import pause from '../../icons/pause.svg';
 import close from '../../icons/x.svg';
 import play from '../../icons/play.svg';
-import { Card } from 'components/TreckerCard/TreckerCard';
+import { Card } from 'components/Card/Card';
 
 export const TimerTreckerCard = ({
   subTitle,
@@ -30,7 +30,7 @@ export const TimerTreckerCard = ({
     close(id);
   };
   return (
-    <Card onClose={onClose}>
+    <Card onClose={onClose} backgroundColor={backgroundColor}>
       <TreckerTittle subTitle={subTitle} title={title} />
       <TreckerTimer className={s['trecker-card__timer']} />
     </Card>
@@ -85,7 +85,6 @@ const TreckerTimer = ({ className }) => {
 
   return (
     <>
-      {' '}
       <p className={classes}>
         {minutes}
         <span>:</span>

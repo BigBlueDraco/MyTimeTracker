@@ -1,6 +1,6 @@
 import classNames from 'class-names';
 import close from '../../icons/x.svg';
-import s from './TreckerCard.module.scss';
+import s from './Card.module.scss';
 import { Button } from 'components/Button/Button';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,9 @@ export const Card = ({
   width,
   height,
   children,
-  onClose = () => {},
+  onClose = () => {
+    console.log('close');
+  },
   isClosebel = true,
 }) => {
   const classes = classNames(s['trecker-card'], className);
@@ -26,7 +28,7 @@ export const Card = ({
     >
       {isClosebel && (
         <Button
-          onClose={onClose}
+          onClick={onClose}
           className={`${s['trecker-card__btn']} ${s['trecker-card__btn--close']}`}
         >
           <img src={close} alt="" />
