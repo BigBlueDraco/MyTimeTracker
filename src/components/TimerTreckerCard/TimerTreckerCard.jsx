@@ -47,14 +47,15 @@ const TreckerTittle = ({ subTitle, title }) => {
 };
 
 const TreckerTimer = ({ className }) => {
-  const classes = classNames(className, {
-    [`${s['started']}`]: true,
-  });
+  const [isActive, setIsActive] = useState(false);
   const [saveTime, setSaveTime] = useState(0);
   const [timerInterval, setTimerInterval] = useState();
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [seconds, setSeconds] = useState('');
+  const classes = classNames(className, {
+    [`${s['started']}`]: isActive,
+  });
 
   const getTime = (startTime, saveTime) => {
     if (saveTime) {
@@ -76,10 +77,12 @@ const TreckerTimer = ({ className }) => {
   const startTimer = () => {
     const startTime = Date.now();
     const interval = setInterval(() => getTime(startTime, saveTime), 1000);
+    setIsActive(true);
     setTimerInterval(interval);
   };
 
   const stopTimer = () => {
+    setIsActive(false);
     clearInterval(timerInterval);
   };
 
