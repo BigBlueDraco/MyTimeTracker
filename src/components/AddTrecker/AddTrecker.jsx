@@ -1,6 +1,5 @@
 import { Button } from 'components/Button/Button';
 import { CirclePicker } from 'react-color';
-import classNames from 'class-names';
 import plus from 'icons/plus.svg';
 import s from './AddTrecker.module.scss';
 import { useState } from 'react';
@@ -70,7 +69,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
     >
       {!isFormOpen && (
         <Button className={s['add-trecker__btn']} onClick={toggleForm}>
-          <img src={plus} width="45px"></img>
+          <img src={plus} width="45px" alt=""></img>
         </Button>
       )}
       {isFormOpen && (

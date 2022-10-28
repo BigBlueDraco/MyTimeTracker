@@ -1,5 +1,4 @@
 import classNames from 'class-names';
-import pause from 'icons/pause.svg';
 import PropTypes from 'prop-types';
 import s from './button.module.scss';
 
