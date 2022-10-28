@@ -4,6 +4,7 @@ import classNames from 'class-names';
 import plus from 'icons/plus.svg';
 import s from './AddTrecker.module.scss';
 import { useState } from 'react';
+import { Card } from 'components/TreckerCard/TreckerCard';
 
 export const AddTrecker = ({ className, onSubmit }) => {
   const [color, setColor] = useState('');
@@ -37,7 +38,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
   };
 
   return (
-    <div className={s['add-trecker']}>
+    <Card className={s['add-trecker']}>
       {/* <Button className={s['add-trecker__btn']}>
         <img src={plus} width="45px"></img>
       </Button> */}
@@ -81,6 +82,6 @@ export const AddTrecker = ({ className, onSubmit }) => {
         </label>
         <Button type="submit" />
       </form>
-    </div>
+    </Card>
   );
 };

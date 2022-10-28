@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import s from './button.module.scss';
 
 export const Button = ({
-  children,
-  onClick,
-  className,
-  disabled,
-  active,
+  children = 'Default Button',
+  onClick = () => {},
+  className = '',
+  disabled = false,
+  active = false,
   ...attrs
 }) => {
   const classes = classNames(s['btn'], className, { active });
@@ -30,12 +30,4 @@ Button.propTypes = {
   classNames: PropTypes.string,
   disabled: PropTypes.bool,
   active: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  children: 'Default Button',
-  onClick: () => {},
-  classNames: '',
-  disabled: false,
-  active: false,
 };
