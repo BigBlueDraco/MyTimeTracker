@@ -7,8 +7,26 @@ import { useState } from 'react';
 import { Card } from 'components/Card/Card';
 import { nanoid } from 'nanoid';
 
+const COLORS = [
+  '#ffc0eb',
+  '#ffc0cb',
+  '#EB9697',
+
+  '#b79bdd',
+  '#67a2d8',
+  '#6666ff',
+
+  '#b6d7a8',
+  '	#079962',
+  '#055a39',
+
+  '#dce173',
+  '#f4ff4b',
+  '#ffbf00',
+];
+
 export const AddTrecker = ({ className, onSubmit }) => {
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState('#EB9697');
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -39,7 +57,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
     e.preventDefault();
     onSubmit({ id: nanoid(), color, title, subTitle });
     toggleForm();
-    setColor('');
+    setColor('#EB9697');
     setTitle('');
     setSubTitle('');
   };
@@ -59,14 +77,14 @@ export const AddTrecker = ({ className, onSubmit }) => {
         <form
           onSubmit={handleSubmit}
           action=""
-          className={s['add-trecker__form']}
+          className={s['add-trecker-form']}
         >
           <label htmlFor="">
             <p>Title</p>
             <input
               type="text"
               name="title"
-              className={s['add-trecker__input']}
+              className={s['add-trecker-form__input']}
               onInput={e => handleChange(e)}
               value={title}
             />
@@ -76,32 +94,22 @@ export const AddTrecker = ({ className, onSubmit }) => {
             <input
               type="text"
               name="subTitle"
-              className={s['add-trecker__input']}
+              className={s['add-trecker-form__input']}
               onInput={e => handleChange(e)}
               value={subTitle}
             />
           </label>
           <label htmlFor="">
             Choose color
-            <CirclePicker
-              onChange={handleColorChange}
-              colors={[
-                '#B80000',
-                '#DB3E00',
-                '#FCCB00',
-                '#008B02',
-                '#006B76',
-                '#1273DE',
-                '#004DCF',
-                '#5300EB',
-                '#EB9694',
-                '#EB9695',
-                '#EB9696',
-                '#EB9697',
-              ]}
-            />
+            <CirclePicker onChange={handleColorChange} colors={COLORS} />
           </label>
-          <Button type="submit" style={{ backgroundColor: color }} />
+          <Button
+            className={s['add-trecker-form__btn']}
+            type="submit"
+            style={{ backgroundColor: color }}
+          >
+            Add Trecker
+          </Button>
         </form>
       )}
     </Card>
