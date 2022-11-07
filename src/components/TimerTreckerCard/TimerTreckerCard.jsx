@@ -69,7 +69,6 @@ const TreckerTimer = ({ className, currentTime, id }) => {
     if (currentTime) {
       const time = currentTime + Date.now() - startTime;
       setTime(time);
-      return;
     } else {
       const time = Date.now() - startTime;
       setTime(time);
