@@ -10,21 +10,14 @@ import { addTrecker } from 'redux/treckersSlice';
 import { Input } from 'components/Input/Input';
 
 const COLORS = [
-  '#ffc0eb',
   '#ffc0cb',
   '#EB9697',
 
   '#b79bdd',
-  '#67a2d8',
   '#6666ff',
 
   '#b6d7a8',
   '	#079962',
-  '#055a39',
-
-  '#dce173',
-  '#f4ff4b',
-  '#ffbf00',
 ];
 
 export const AddTrecker = ({ className, onSubmit }) => {
@@ -82,28 +75,18 @@ export const AddTrecker = ({ className, onSubmit }) => {
           action=""
           className={s['add-trecker-form']}
         >
-          <Input onChange={handleChange} type="text" name="title" />
-          {/* <label htmlFor="">
-            <p>Title</p>
-            <input
-              type="text"
-              name="title"
-              className={s['add-trecker-form__input']}
-              onInput={e => handleChange(e)}
-              value={title}
-            />
-          </label>  */}
-          <Input onChange={handleChange} type="text" name="title" />
-          {/* <label htmlFor="">
-            <p>Sub Title</p>
-            <input
-              type="text"
-              name="subTitle"
-              className={s['add-trecker-form__input']}
-              onInput={e => handleChange(e)}
-              value={subTitle}
-            />
-          </label> */}
+          <Input
+            onChange={handleChange}
+            type="text"
+            name="title"
+            label="Title"
+          />
+          <Input
+            onChange={handleChange}
+            type="text"
+            name="title"
+            label={'subTitle'}
+          />
           <label htmlFor="">
             Choose color
             <CirclePicker onChange={handleColorChange} colors={COLORS} />

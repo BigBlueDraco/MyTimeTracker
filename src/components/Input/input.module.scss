@@ -1,18 +1,18 @@
 .input {
   position: relative;
-  margin: calc(var(--size-bezel) * 0.2 + 2px) calc(var(--size-bezel) * 0.25);
+  margin: calc(var(--size-bezel) * 0.5 + 2px) calc(var(--size-bezel) * 0.25);
   &__label {
     position: absolute;
     left: 0;
     top: 0;
-    padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
+    padding: calc(var(--size-bezel) * 1) calc(var(--size-bezel) * 0.5);
     background: pink;
     white-space: nowrap;
     transform: translate(0, 0);
     transform-origin: 0 0;
     background: transparent;
     transition: transform 120ms ease-in;
-    font-weight: bold;
+    // font-weight: bold;
     line-height: 1.2;
   }
   &__field {
@@ -29,8 +29,9 @@
     &:focus,
     &:not(:placeholder-shown) {
       & + .input__label {
-        transform: translate(0.25rem, -60%) scale(0.8);
+        transform: translate(0.25rem, -65%) scale(0.8);
         background-color: transparent;
+        font-weight: bold;
         // color: var(--color-accent);
       }
     }
