@@ -10,6 +10,9 @@ import s from 'components/TimerTreckerCard/TimerTreckerCard.module.scss';
 import pause from '../../icons/pause.svg';
 import play from '../../icons/play.svg';
 import { Card } from 'components/Card/Card';
+import { useDispatch } from 'react-redux';
+import { removeTrecker, updateTrecker } from 'redux/treckersSlice';
+import { useEffect } from 'react';
 
 export const TimerTreckerCard = ({
   subTitle = 'Timer default subTitle',
@@ -17,6 +20,7 @@ export const TimerTreckerCard = ({
 
   close,
   id,
+  time,
 
   className,
   backgroundColor,
@@ -24,14 +28,18 @@ export const TimerTreckerCard = ({
   height,
 }) => {
   // const classes = classNames(s['trecker-card'], className);
-
+  const dispath = useDispatch();
   const onClose = e => {
-    close(id);
+    dispath(removeTrecker(id));
   };
   return (
     <Card onClose={onClose} backgroundColor={backgroundColor}>
       <TreckerTittle subTitle={subTitle} title={title} />
-      <TreckerTimer className={s['trecker-card__timer']} />
+      <TreckerTimer
+        className={s['trecker-card__timer']}
+        id={id}
+        currentTime={time}
+      />
     </Card>
   );
 };
@@ -45,9 +53,10 @@ const TreckerTittle = ({ subTitle, title }) => {
   );
 };
 
-const TreckerTimer = ({ className }) => {
+const TreckerTimer = ({ className, currentTime, id }) => {
+  const dispath = useDispatch();
   const [isActive, setIsActive] = useState(false);
-  const [saveTime, setSaveTime] = useState(0);
+  const [deltaTime, setDeltaTime] = useState(currentTime);
   const [timerInterval, setTimerInterval] = useState();
   const [, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
@@ -56,33 +65,41 @@ const TreckerTimer = ({ className }) => {
     [`${s['started']}`]: isActive,
   });
 
-  const getTime = (startTime, saveTime) => {
-    if (saveTime) {
-      const time = saveTime + Date.now() - startTime;
+  const getTime = (startTime, id) => {
+    if (currentTime) {
+      const time = currentTime + Date.now() - startTime;
       setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
-      setSaveTime(time);
+      setDeltaTime(time);
       return;
     } else {
       const time = Date.now() - startTime;
       setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
-      setSaveTime(time);
+      setDeltaTime(time);
     }
   };
-
-  const startTimer = () => {
-    const startTime = Date.now();
-    const interval = setInterval(() => getTime(startTime, saveTime), 1000);
-    setIsActive(true);
-    setTimerInterval(interval);
+  const saveTimerData = () => {
+    dispath(updateTrecker({ id, time: deltaTime }));
   };
 
-  const stopTimer = () => {
-    setIsActive(false);
-    clearInterval(timerInterval);
+  useEffect(() => {
+    saveTimerData();
+  }, [deltaTime]);
+
+  const toggleTimer = () => {
+    if (isActive) {
+      setIsActive(false);
+      clearInterval(timerInterval);
+      saveTimerData();
+      return;
+    }
+    const startTime = Date.now();
+    const interval = setInterval(() => getTime(startTime, currentTime), 1000);
+    setIsActive(true);
+    setTimerInterval(interval);
   };
 
   return (
@@ -94,22 +111,19 @@ const TreckerTimer = ({ className }) => {
       </p>
       <TreckerTimerControls
         className={s['trecker-card__controls']}
-        startTimer={startTimer}
-        stopTimer={stopTimer}
+        toggleTimer={toggleTimer}
+        isActive={isActive}
       />
     </>
   );
 };
 
-const TreckerTimerControls = ({ className, startTimer, stopTimer }) => {
+const TreckerTimerControls = ({ className, toggleTimer, isActive }) => {
   const classes = classNames(className);
   return (
     <div className={classes}>
-      <Button className={s['trecker-card__btn']} onClick={startTimer}>
-        <img src={play} alt="" />
-      </Button>
-      <Button className={s['trecker-card__btn']} onClick={stopTimer}>
-        <img src={pause} alt="" />
+      <Button className={s['trecker-card__btn']} onClick={toggleTimer}>
+        {isActive ? <img src={pause} alt="" /> : <img src={play} alt="" />}
       </Button>
     </div>
   );

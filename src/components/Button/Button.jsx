@@ -1,4 +1,4 @@
-import classNames from 'class-names';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import s from './button.module.scss';
 

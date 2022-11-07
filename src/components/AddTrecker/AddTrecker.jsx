@@ -5,6 +5,8 @@ import s from './AddTrecker.module.scss';
 import { useState } from 'react';
 import { Card } from 'components/Card/Card';
 import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addTrecker } from 'redux/treckersSlice';
 
 const COLORS = [
   '#ffc0eb',
@@ -29,6 +31,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const dispath = useDispatch();
   const handleColorChange = (color, event) => {
     setColor(color.hex);
   };
@@ -54,7 +57,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ id: nanoid(), color, title, subTitle });
+    dispath(addTrecker({ color, title, subTitle }));
     toggleForm();
     setColor('#EB9697');
     setTitle('');
