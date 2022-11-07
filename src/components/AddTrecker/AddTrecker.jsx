@@ -7,6 +7,7 @@ import { Card } from 'components/Card/Card';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { addTrecker } from 'redux/treckersSlice';
+import { Input } from 'components/Input/Input';
 
 const COLORS = [
   '#ffc0eb',
@@ -81,7 +82,8 @@ export const AddTrecker = ({ className, onSubmit }) => {
           action=""
           className={s['add-trecker-form']}
         >
-          <label htmlFor="">
+          <Input onChange={handleChange} type="text" name="title" />
+          {/* <label htmlFor="">
             <p>Title</p>
             <input
               type="text"
@@ -90,8 +92,9 @@ export const AddTrecker = ({ className, onSubmit }) => {
               onInput={e => handleChange(e)}
               value={title}
             />
-          </label>
-          <label htmlFor="">
+          </label>  */}
+          <Input onChange={handleChange} type="text" name="title" />
+          {/* <label htmlFor="">
             <p>Sub Title</p>
             <input
               type="text"
@@ -100,7 +103,7 @@ export const AddTrecker = ({ className, onSubmit }) => {
               onInput={e => handleChange(e)}
               value={subTitle}
             />
-          </label>
+          </label> */}
           <label htmlFor="">
             Choose color
             <CirclePicker onChange={handleColorChange} colors={COLORS} />
