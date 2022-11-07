@@ -69,17 +69,19 @@ const TreckerTimer = ({ className, currentTime, id }) => {
     if (currentTime) {
       const time = currentTime + Date.now() - startTime;
       setTime(time);
-      saveTimerData();
     } else {
       const time = Date.now() - startTime;
       setTime(time);
-      saveTimerData();
     }
   };
 
   const saveTimerData = () => {
     dispath(updateTrecker({ id, time, isActive, interval: timerInterval }));
   };
+
+  useEffect(() => {
+    saveTimerData();
+  });
 
   useEffect(() => {
     setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
