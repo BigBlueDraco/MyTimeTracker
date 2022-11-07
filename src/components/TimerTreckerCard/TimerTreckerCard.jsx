@@ -69,11 +69,12 @@ const TreckerTimer = ({ className, currentTime, id }) => {
     if (currentTime) {
       const time = currentTime + Date.now() - startTime;
       setTime(time);
+      saveTimerData();
     } else {
       const time = Date.now() - startTime;
       setTime(time);
+      saveTimerData();
     }
-    saveTimerData();
   };
 
   const saveTimerData = () => {
@@ -118,7 +119,6 @@ const TreckerTimer = ({ className, currentTime, id }) => {
         {hours
           ? minutes.toString().padStart(2, '0')
           : seconds.toString().padStart(2, '0')}
-        {/* {seconds.toString().padStart(2, '0')} */}
       </p>
       <TreckerTimerControls
         className={s['trecker-card__controls']}
