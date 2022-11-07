@@ -74,6 +74,7 @@ const TreckerTimer = ({ className, currentTime, id }) => {
       const time = Date.now() - startTime;
       setTime(time);
     }
+    saveTimerData();
   };
 
   const saveTimerData = () => {
@@ -84,7 +85,6 @@ const TreckerTimer = ({ className, currentTime, id }) => {
     setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
-    saveTimerData();
   }, [time]);
 
   const stopTimer = () => {
