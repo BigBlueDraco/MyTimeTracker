@@ -1,13 +1,12 @@
 export const Section = ({
   title = 'default section title',
   children = 'section',
+  className,
 }) => {
   return (
-    <div className="container">
-      <section>
-        <h2>{title}</h2>
-        {children}
-      </section>
-    </div>
+    <section className={className}>
+      <h2>{title}</h2>
+      {children}
+    </section>
   );
 };

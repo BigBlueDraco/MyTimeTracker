@@ -1,5 +1,16 @@
 .trecker-list {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  justify-content: flex-start;
+  // gap: 4.2%;
+  gap: 20px;
+  padding: 0 45px;
+}
+
+.trecker-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
