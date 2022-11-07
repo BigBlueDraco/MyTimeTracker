@@ -1,5 +1,5 @@
 import { TreckerList } from './TreckerList/TreckerList';
-import { Header } from './Headersodaof/Header';
+import { Header } from './Header/Header';
 
 export const App = () => {
   return (
