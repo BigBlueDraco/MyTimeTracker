@@ -1,4 +1,4 @@
-import s from './Header.module.scss';
+import s from './styles.module.scss';
 export const Header = () => {
   return (
     <header className={s['header']}>
