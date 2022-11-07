@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { element } from 'prop-types';
 
 export const treckersSlice = createSlice({
   name: 'treckers',
@@ -10,8 +9,6 @@ export const treckersSlice = createSlice({
   reducers: {
     addTrecker: {
       reducer(state, action) {
-        console.log(state.items);
-        console.log(action.payload);
         state.items.push(action.payload);
       },
       prepare({ title, subTitle, color }) {
@@ -22,6 +19,7 @@ export const treckersSlice = createSlice({
             color,
             time: 0,
             id: nanoid(),
+            isActive: false,
           },
         };
       },
@@ -30,14 +28,13 @@ export const treckersSlice = createSlice({
       const { id, time } = action.payload;
       state.items.map(element => {
         if (element.id === id) {
-          console.log(time);
           return (element.time = time);
         }
+        return element;
       });
     },
     removeTrecker: (state, action) => {
-      console.log(action.payload);
-      state.items = state.items.filter(({ id }) => id != action.payload);
+      state.items = state.items.filter(({ id }) => id !== action.payload);
     },
   },
 });

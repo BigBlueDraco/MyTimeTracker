@@ -18,14 +18,10 @@ export const TimerTreckerCard = ({
   subTitle = 'Timer default subTitle',
   title = 'timer default Title',
 
-  close,
   id,
   time,
 
-  className,
   backgroundColor,
-  width,
-  height,
 }) => {
   // const classes = classNames(s['trecker-card'], className);
   const dispath = useDispatch();
@@ -56,11 +52,15 @@ const TreckerTittle = ({ subTitle, title }) => {
 const TreckerTimer = ({ className, currentTime, id }) => {
   const dispath = useDispatch();
   const [isActive, setIsActive] = useState(false);
-  const [deltaTime, setDeltaTime] = useState(currentTime);
+
+  const [time, setTime] = useState(currentTime || 0);
+
   const [timerInterval, setTimerInterval] = useState();
-  const [, setHours] = useState('');
-  const [minutes, setMinutes] = useState('');
-  const [seconds, setSeconds] = useState('');
+
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   const classes = classNames(className, {
     [`${s['started']}`]: isActive,
   });
@@ -68,46 +68,58 @@ const TreckerTimer = ({ className, currentTime, id }) => {
   const getTime = (startTime, id) => {
     if (currentTime) {
       const time = currentTime + Date.now() - startTime;
-      setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
-      setMinutes(Math.floor((time / 1000 / 60) % 60));
-      setSeconds(Math.floor((time / 1000) % 60));
-      setDeltaTime(time);
+      setTime(time);
       return;
     } else {
       const time = Date.now() - startTime;
-      setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
-      setMinutes(Math.floor((time / 1000 / 60) % 60));
-      setSeconds(Math.floor((time / 1000) % 60));
-      setDeltaTime(time);
+      setTime(time);
     }
   };
+
   const saveTimerData = () => {
-    dispath(updateTrecker({ id, time: deltaTime }));
+    dispath(updateTrecker({ id, time, isActive, interval: timerInterval }));
   };
 
   useEffect(() => {
+    setHours(Math.floor(Math.floor((time / (1000 * 60 * 60)) % 24)));
+    setMinutes(Math.floor((time / 1000 / 60) % 60));
+    setSeconds(Math.floor((time / 1000) % 60));
     saveTimerData();
-  }, [deltaTime]);
+  }, [time]);
+
+  const stopTimer = () => {
+    setIsActive(false);
+    clearInterval(timerInterval);
+    saveTimerData();
+  };
+
+  const startTimer = () => {
+    const startTime = Date.now();
+    const interval = setInterval(() => getTime(startTime, currentTime), 1000);
+    setTimerInterval(interval);
+    setIsActive(true);
+    saveTimerData();
+  };
 
   const toggleTimer = () => {
     if (isActive) {
-      setIsActive(false);
-      clearInterval(timerInterval);
-      saveTimerData();
+      stopTimer();
       return;
     }
-    const startTime = Date.now();
-    const interval = setInterval(() => getTime(startTime, currentTime), 1000);
-    setIsActive(true);
-    setTimerInterval(interval);
+    startTimer();
   };
 
   return (
     <>
       <p className={classes}>
-        {minutes.toString().padStart(2, '0')}
+        {hours
+          ? hours.toString().padStart(2, '0')
+          : minutes.toString().padStart(2, '0')}
         <span>:</span>
-        {seconds.toString().padStart(2, '0')}
+        {hours
+          ? minutes.toString().padStart(2, '0')
+          : seconds.toString().padStart(2, '0')}
+        {/* {seconds.toString().padStart(2, '0')} */}
       </p>
       <TreckerTimerControls
         className={s['trecker-card__controls']}

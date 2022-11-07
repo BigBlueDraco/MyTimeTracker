@@ -11,7 +11,6 @@ export const Card = ({
   height,
   children,
   onClose = () => {
-    console.log('close');
   },
   isClosebel = true,
 }) => {

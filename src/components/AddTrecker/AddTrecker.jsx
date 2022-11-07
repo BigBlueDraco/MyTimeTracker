@@ -4,7 +4,6 @@ import plus from 'icons/plus.svg';
 import s from './AddTrecker.module.scss';
 import { useState } from 'react';
 import { Card } from 'components/Card/Card';
-import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { addTrecker } from 'redux/treckersSlice';
 import { Input } from 'components/Input/Input';

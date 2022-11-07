@@ -1,7 +1,6 @@
 import { AddTrecker } from 'components/AddTrecker/AddTrecker';
 import { Section } from 'components/Section.jsx/Sectioon';
 import { TimerTreckerCard } from 'components/TimerTreckerCard/TimerTreckerCard';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTreckers } from 'redux/treckersSelectors';
 import s from './TreckerList.module.scss';
